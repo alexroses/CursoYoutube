@@ -1,0 +1,224 @@
+<!-- CONTEÚDO -->
+<section id="listaUsuarios" class="section-glass animate">
+  <div class="row text-center">
+    <main class="container my-5 animate">
+      <h1 class="text-center mb-4">Dados do Usuário</h1>
+
+      <form id="userForm" method="post" action="/alteraUser">
+
+      <div class="glass-card p-4 mx-auto" style="max-width: 650px">
+        
+
+        <div class="mb-3">
+          <label class="form-label">ID</label>
+          <input
+            type="text"
+            class="form-control"
+            id="userId"
+            name="id"
+            value="{{dadosuser.idUsuario}}"
+            readonly
+            required
+          />
+        </div>
+
+        <!-- NOME -->
+        <div class="mb-3">
+          <label class="form-label">Nome</label>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              id="userNome"
+              name="nome"
+              value="{{dadosuser.nomeUsuario}}"
+              disabled 
+              required
+            />
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              onclick="editarCampo('userNome')"
+            >
+              <i class="fas fa-pen"></i>
+            </button>
+          </div>
+        </div>
+
+        
+
+        <!-- EMAIL -->
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <div class="input-group">
+            <input
+              type="email"
+              class="form-control"
+              id="userEmail"
+              name="email"
+              value="{{dadosuser.emailUsuario}}"
+              readonly
+              required
+            />
+            
+            </button>
+          </div>
+        </div>
+
+        <!-- DATA DE NASCIMENTO -->
+        <div class="mb-4">
+          <label class="form-label">Data de Nascimento</label>
+          <div class="input-group">
+            <input
+              type="date"
+              class="form-control"
+              id="userDn"
+              name="dn"
+              value="{{dadosuser.dnUsuario}}"
+              disabled
+              required
+            />
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              onclick="editarCampo('userDn')"
+            >
+              <i class="fas fa-pen"></i>
+            </button>
+          </div>
+        </div>
+
+        
+
+        <div class="d-flex justify-content-center gap-3 mt-4 animate">
+          <!-- VOLTAR -->
+          <a href="usuarios" class="btn btn-outline-secondary btn-animate">
+            <i class="fas fa-arrow-left me-1"></i>
+            Voltar
+          </a>
+
+          
+          <!-- EDITAR -->
+          <button
+            type="button"
+            class="btn btn-primary btn-animate"
+            data-bs-toggle="modal"
+            data-bs-target="#confirmEdicao"
+            onclick="desproteger()"
+            
+          >
+            <i class="fas fa-pen me-1"></i>
+            Editar
+          </button>
+
+          <!-- DELETE -->
+          <button
+            type="button"
+            class="btn btn-danger btn-animate"
+            data-bs-toggle="modal"
+            data-bs-target="#confirmExclusao"
+          >
+            <i class="fas fa-trash me-1"></i>
+            Excluir
+          </button>
+        
+
+          
+        </div>
+      </div>
+      </form>
+    </main>
+  </div>
+</section>
+
+
+
+
+
+<!-- MODAL FORA DO FORM -->
+<div class="modal fade" id="confirmEdicao" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmar Alteração</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+
+      <div class="modal-body">Deseja confirmar alteração de cadastro deste usuário?</div>
+
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          data-bs-dismiss="modal"
+        >
+          Cancelar
+        </button>
+
+        <button
+          type="submit"
+          form="userForm"
+          class="btn btn-success"
+          form="userForm" 
+          formaction="/alteraUser"
+        >
+          Confirmar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="confirmExclusao" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmar Exclusão</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+
+      <div class="modal-body">Deseja confirmar exclusão deste usuário?</div>
+
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          data-bs-dismiss="modal"
+        >
+          Cancelar
+        </button>
+
+        <button
+          type="submit"
+          form="userForm"
+          class="btn btn-success"
+          formaction="/deletaUser"
+        >
+          Confirmar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function desproteger() {
+  document.getElementById("userNome").disabled = false;
+  document.getElementById("userDn").disabled = false;
+
+  // Atualiza os campos ocultos com os valores atuais
+  
+}
+</script>
+
+
+
+

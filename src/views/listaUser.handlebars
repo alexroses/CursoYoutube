@@ -1,0 +1,56 @@
+<!-- CONTEÚDO -->
+<section id="listaUsuarios" class="section-glass animate">
+  <div class="row text-center">
+
+    <div>
+
+      <a href="novoUser" class="btn btn-success btn-animate">
+            <i class="fas fa-user-plus me-1"></i>
+            Cadastrar
+          </a>
+    
+    </div>
+
+    <main class="container my-5 animate">
+      <h1 class="mb-4 text-center">Lista de Usuários</h1>
+
+      <div class="table-responsive glass-card p-4">
+        <table class="table table-hover align-middle text-center">
+          <thead class="table-light">
+            <tr>
+
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Email</th>
+              <th>Data de Nascimento</th>
+              <th>Ação</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {{#each dadosuser}}
+              <tr>
+                <td>{{idUsuario}}</td>
+                <td>{{nomeUsuario}}</td>
+                <td>{{emailUsuario}}</td>
+                <td>{{dnUsuario}}</td>
+
+                <td>
+                  <a
+                    href="usuario/{{idUsuario}}"
+                    class="btn btn-sm btn-gold"
+                  >
+                    <i class="fas fa-eye"></i>
+                    Ver
+                  </a>
+                </td>
+              </tr>
+
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+  </div>
+</section>

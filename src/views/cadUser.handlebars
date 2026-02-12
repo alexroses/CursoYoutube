@@ -1,0 +1,108 @@
+<section class="section-glass animate">
+  <div class="container my-5">
+    <h2 class="text-center mb-4">Cadastrar Novo Usuário</h2>
+
+    <form
+      id="userForm"
+      method="post"
+      class="glass-card p-4 mx-auto"
+      style="max-width: 600px"
+      action="/cadUser"
+    >
+      <!-- campos do formulário -->
+     
+      
+      
+       <div class="mb-3">
+        <label class="form-label">Nome</label>
+        <input type="text" class="form-control" name="nome" id="nome" value="{{dadosuser.nomeUsuario}}" required />
+       </div>
+      
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" name="email" id="email" value="{{dadosuser.emailUsuario}}" required />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Data de Nascimento</label>
+        <input type="date" class="form-control" name="dn" id="dn" value="{{dadosuser.dnUsuario}}" required />
+      </div>
+      
+   
+        
+     
+      
+      
+   
+
+      <!-- botão abre modal -->
+
+      <div class="d-flex justify-content-center gap-3 animate">
+        
+        <a href="usuarios" class="btn btn-outline-secondary btn-animate">
+          <i class="fas fa-arrow-left me-1"></i>
+          Voltar
+        </a>
+
+        <button
+          type="button"
+          class="btn btn-success btn-animate"
+          data-bs-toggle="modal"
+          data-bs-target="#confirmCadastro"
+        >
+          <i class="fas fa-save me-1"></i>
+          Salvar
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-warning btn-animate"
+          onclick="limparFormulario3()"
+        >
+          <i class="fas fa-eraser me-1"></i>
+          Limpar
+        </button>
+
+        
+      </div>
+    </form>
+  </div>
+</section>
+
+
+<!-- MODAL FORA DO FORM -->
+<div class="modal fade" id="confirmCadastro" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmar cadastro</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+
+      <div class="modal-body">Deseja confirmar o cadastro deste usuário?</div>
+
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          data-bs-dismiss="modal"
+        >
+          Cancelar
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-success"
+          onclick="submitFormCadastro()"
+        >
+          Confirmar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

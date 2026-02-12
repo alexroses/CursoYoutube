@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <base href="/" />
+
+    {{#if cabecalho}}
+      {{> cabecalho}}
+    {{else}}
+    
+    {{/if}}
+  </head>
+  <body>
+    
+    
+      {{> mensagem}}
+    
+    
+    
+
+    {{#if hero}} 
+      {{> hero}} 
+    {{else}} 
+    
+    {{/if}} 
+    
+    {{#if carrossel}} 
+      {{> carrossel}}
+    {{else}}
+    
+    {{/if}} 
+    
+    {{{body}}} 
+    
+    {{#if beneficios}} 
+      {{> benef}} 
+    {{else}} 
+    
+    {{/if}}
+  </body>
+
+  {{#if rodape}} 
+    {{> rodape }} 
+  {{else}} 
+  
+  {{/if}}
+</html>

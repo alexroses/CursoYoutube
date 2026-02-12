@@ -1,0 +1,425 @@
+/* =====================================================
+   VARIÁVEIS DE COR
+===================================================== */
+:root {
+  --rosa-claro: #fde2eb;
+  --rosa-medio: #f7a1c2;
+  --rosa-profundo: #e88fb1;
+
+  --amarelo-claro: #fff3c4;
+  --amarelo-dourado: #f5d76e;
+
+  --branco: #ffffff;
+  --branco-transp: rgba(255, 255, 255, 0.75);
+}
+
+/* =====================================================
+   RESET / BASE
+===================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  scroll-behavior: smooth;
+  background: linear-gradient(180deg, var(--rosa-claro) 0%, var(--branco) 60%);
+  color: #5a2a3c;
+}
+
+/* =====================================================
+   DEGRADÊ ROSA ANIMADO + GLASS (PERFORMANCE)
+===================================================== */
+@keyframes rosaFluxo {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* =====================================================
+   CABEÇALHO
+===================================================== */
+.header-luxo {
+  background: linear-gradient(
+    135deg,
+    var(--branco-transp),
+    var(--amarelo-claro)
+  );
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--amarelo-dourado);
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+}
+
+.logo {
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--rosa-profundo);
+}
+
+.menu a {
+  color: #7a3b52;
+  margin: 0 12px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.menu a:hover {
+  color: var(--rosa-profundo);
+}
+
+/* =====================================================
+   LOGIN CASCATA
+===================================================== */
+.btn-login {
+  background: linear-gradient(135deg, var(--rosa-claro), var(--amarelo-claro));
+  border: 1px solid var(--amarelo-dourado);
+  color: #7a3b52;
+}
+
+.login-glass {
+  background: linear-gradient(180deg, var(--branco), var(--rosa-claro));
+  border: 1px solid var(--amarelo-dourado);
+  border-radius: 12px;
+}
+
+.login-glass input {
+  background: var(--branco);
+  border: 1px solid #e5cbd5;
+  color: #5a2a3c;
+}
+
+.login-glass input::placeholder {
+  color: #a06a80;
+}
+
+/* =====================================================
+   HERO (ROSA ANIMADO)
+===================================================== */
+.hero-luxo {
+  min-height: 50vh;
+  padding-top: 120px;
+  padding-bottom: 80px;
+  text-align: center;
+
+  background: linear-gradient(
+    135deg,
+    rgba(247, 161, 194, 0.9),
+    rgba(232, 143, 177, 0.9),
+    rgba(253, 226, 235, 0.9)
+  );
+  background-size: 300% 300%;
+  animation: rosaFluxo 14s ease infinite;
+  backdrop-filter: blur(14px);
+  will-change: background-position;
+}
+
+.titulo-luxo {
+  color: var(--branco);
+  font-weight: 700;
+}
+
+/* =====================================================
+   BOTÕES (CONVERSÃO)
+===================================================== */
+.btn-gold {
+  background: linear-gradient(
+    135deg,
+    var(--amarelo-dourado),
+    var(--amarelo-claro)
+  );
+  color: #7a3b52;
+  font-weight: 600;
+  border: none;
+  box-shadow: 0 8px 20px rgba(245, 215, 110, 0.45);
+  transition: all 0.3s;
+}
+
+.btn-gold:hover {
+  transform: translateY(-2px);
+}
+
+/* =====================================================
+   SEÇÕES GLASS
+===================================================== */
+.section-glass {
+  margin: 80px auto;
+  padding: 60px;
+  max-width: 1100px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.85),
+    rgba(253, 226, 235, 0.85)
+  );
+  backdrop-filter: blur(18px);
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(232, 143, 177, 0.25);
+}
+
+/* Ícones */
+.icon-gold {
+  font-size: 2.5rem;
+  color: var(--amarelo-dourado);
+}
+
+/* =====================================================
+   CARROSSEL
+===================================================== */
+.carousel img {
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(232, 143, 177, 0.35);
+}
+
+/* =====================================================
+   CTA FINAL (ROSA ANIMADO)
+===================================================== */
+.cta-luxo {
+  padding: 100px 20px;
+  text-align: center;
+  color: var(--branco);
+
+  background: linear-gradient(
+    160deg,
+    rgba(232, 143, 177, 0.9),
+    rgba(247, 161, 194, 0.9),
+    rgba(245, 215, 110, 0.25)
+  );
+  background-size: 300% 300%;
+  animation: rosaFluxo 14s ease infinite;
+  backdrop-filter: blur(16px);
+  will-change: background-position;
+}
+
+/* =====================================================
+   RODAPÉ
+===================================================== */
+.footer-luxo {
+  background: linear-gradient(135deg, var(--amarelo-claro), var(--branco));
+  color: #7a3b52;
+  border-top: 1px solid var(--amarelo-dourado);
+}
+
+/* =====================================================
+   WHATSAPP
+===================================================== */
+.whatsapp-float {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #25d366, var(--amarelo-dourado));
+  /*background: linear-gradient(
+    135deg,
+    var(--rosa-medio),
+    var(--amarelo-dourado)
+  );*/
+  background-size: 200% 200%;
+  animation: rosaFluxo 12s ease infinite;
+  color: var(--branco);
+  border-radius: 50%;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  will-change: background-position;
+}
+
+/* =====================================================
+   ANIMAÇÕES DE SCROLL
+===================================================== */
+.animate {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+.animate.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =====================================================
+   MOBILE FIRST EXTREMO
+===================================================== */
+@media (max-width: 768px) {
+  .menu {
+    display: none;
+  }
+
+  .hero-luxo {
+    min-height: 40vh;
+    padding-top: 100px;
+  }
+
+  .titulo-luxo {
+    font-size: 1.8rem;
+  }
+
+  .section-glass {
+    padding: 30px 20px;
+    margin: 40px 15px;
+    backdrop-filter: blur(10px);
+  }
+
+  .btn-gold {
+    width: 100%;
+    padding: 14px;
+  }
+
+  .whatsapp-float {
+    width: 64px;
+    height: 64px;
+    font-size: 32px;
+  }
+}
+
+/* =====================================================
+   REDUÇÃO DE MOVIMENTO (ACESSIBILIDADE)
+===================================================== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* =====================================================
+   DARK ROSE (AUTOMÁTICO)
+===================================================== */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: linear-gradient(180deg, #2a0f1a, #14070c);
+    color: #f7c9d8;
+  }
+
+  .header-luxo {
+    background: linear-gradient(
+      135deg,
+      rgba(40, 15, 25, 0.9),
+      rgba(20, 7, 12, 0.9)
+    );
+    border-bottom: 1px solid rgba(245, 215, 110, 0.3);
+  }
+
+  .menu a {
+    color: #f7c9d8;
+  }
+
+  .hero-luxo {
+    background: linear-gradient(
+      135deg,
+      rgba(232, 143, 177, 0.35),
+      rgba(120, 40, 70, 0.85)
+    );
+    background-size: 300% 300%;
+  }
+
+  .section-glass {
+    background: linear-gradient(
+      180deg,
+      rgba(40, 15, 25, 0.85),
+      rgba(20, 7, 12, 0.85)
+    );
+    color: #f7c9d8;
+  }
+
+  .footer-luxo {
+    background: #14070c;
+    color: var(--amarelo-dourado);
+  }
+}
+
+/* =====================================================
+   REDES SOCIAIS – PARTE DE BAIXO
+===================================================== */
+.redes-sociais-footer {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  margin: 30px 0 10px;
+}
+
+.redes-sociais-footer a {
+  font-size: 26px;
+  text-decoration: none;
+  color: var(--rosa-profundo);
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.redes-sociais-footer a:hover {
+  transform: translateY(-4px) scale(1.1);
+  opacity: 0.85;
+}
+
+/* Dark Rose automático */
+@media (prefers-color-scheme: dark) {
+  .redes-sociais-footer a {
+    color: var(--amarelo-dourado);
+  }
+}
+
+.redes-sociais-footer a i {
+  font-size: 24px;
+}
+
+.redes-sociais-footer a:hover i {
+  color: var(--amarelo-dourado);
+}
+
+.animate {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+}
+
+.animate.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =====================================================
+   WHATSAPP – HOVER SCALE SUAVE
+===================================================== */
+.whatsapp-float {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.12);
+  box-shadow: 0 14px 32px rgba(37, 211, 102, 0.6);
+}
+
+/* ===============================
+   ANIMAÇÃO BOTÕES
+================================ */
+.btn-animate {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn-animate:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+}
+
+.btn-animate:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
