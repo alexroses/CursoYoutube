@@ -30,7 +30,7 @@
               type="text"
               class="form-control"
               id="userNome"
-              name="nome"
+              name="nome" minlength="3" maxlength="60" pattern="[a-zA-ZÀ-ÿ\s]+" title="O nome deve conter apenas letras e espaços e deve ter entre 3 e 60 caracteres."
               value="{{dadosuser.nomeUsuario}}"
               disabled 
               required
@@ -74,6 +74,7 @@
               class="form-control"
               id="userDn"
               name="dn"
+              min="1905-01-01" max="2008-01-01" title="Digite uma data de nascimento válida entre 1905 e 2008, máximo de 120 anos e mínimo de 18 anos."
               value="{{dadosuser.dnUsuario}}"
               disabled
               required
