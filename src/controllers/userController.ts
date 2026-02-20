@@ -333,3 +333,15 @@ export const logar = async (req: Request, res: Response) => {
     tipo: "danger",
   });
 };
+
+export const sair = (req: Request, res: Response) => {
+  req.logout((err) => {
+    if (err) {
+      req.flash("error_msg", "Erro ao sair");
+      return res.redirect("/");
+    }
+
+    req.flash("success_msg", "Usuário deslogado saiu com sucesso!");
+    res.redirect("/");
+  });
+};

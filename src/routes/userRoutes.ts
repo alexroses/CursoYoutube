@@ -12,6 +12,7 @@ import {
   excluir,
   pesquisar,
   logar,
+  sair,
 } from "../controllers/userController.ts";
 
 const router = Router();
@@ -25,6 +26,7 @@ router.post("/alteraUser", verificaUser, alterar);
 router.post("/deletaUser", verificaUser, excluir);
 router.get("/pesquisaUser", verificaUser, pesquisar);
 router.get("/login", logar);
+router.get("/logout", sair);
 
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", (err: Error | null, user: any, info: any) => {
