@@ -65,6 +65,7 @@ app.use((req, res, next) => {
   console.log("404 - Página Não Encontrada");
 });
 
-app.listen(3000, () => {
-  console.log("Servidor rodando no site: http://localhost:3000");
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log("Servidor rodando! Porta:", PORT);
 });
