@@ -18,6 +18,12 @@ export const user = sequelize.define(
     dnUsuario: {
       type: DataTypes.DATE,
     },
+    senhaUsuario: {
+      type: DataTypes.STRING,
+    },
+    categoriaUsuario: {
+      type: DataTypes.INTEGER,
+    },
   },
   {
     timestamps: false,

@@ -14,9 +14,14 @@
   </head>
   <body>
     
-    
+   
       {{> mensagem}}
     
+    {{#if busca}}
+      {{> busca}}
+    {{else}}
+
+    {{/if}}
     
     
 
@@ -39,6 +44,10 @@
     {{else}} 
     
     {{/if}}
+
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+
+
   </body>
 
   {{#if rodape}} 

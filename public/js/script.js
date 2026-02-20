@@ -38,7 +38,6 @@ function editarCampo(idCampo) {
   campo.focus();
 }
 
-
 let action = null;
 
 function confirmCreate() {
@@ -108,41 +107,54 @@ function showSuccessToast(message) {
 }
 
 function limparFormulario2() {
-    document.getElementById('userForm').reset();
-} 
+  document.getElementById("userForm").reset();
+}
 
-
-  function submitFormCadastro2() {
-    const modalEl = document.getElementById('confirmEdicao');
-
-    // SEMPRE usar getOrCreateInstance
-    const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
-
-    modal.hide();
-
-    // remove backdrop forçadamente (segurança extra)
-    setTimeout(() => {
-      document.body.classList.remove('modal-open');
-
-      document.querySelectorAll('.modal-backdrop')
-        .forEach(el => el.remove());
-
-      document.getElementById('userForm').submit();
-    }, 300);
-  }
-  
-
-
-  function limparFormulario3() {
-  
-  
+function limparFormulario3() {
   document.getElementById("nome").value = "";
   document.getElementById("email").value = "";
   document.getElementById("dn").value = "";
+  document.getElementById("categ").value = "";
+  document.getElementById("sel").innerHTML = "";
   document.getElementById("nome").focus();
-} 
+}
 
-  
+function preencher() {
+  const nome = campo.value;
 
+  const alertSuccess = document.getElementById("alertSuccess");
+  const alertDanger = document.getElementById("alertDanger");
 
+  // 🔹 Sempre esconder as duas antes de começar
+  alertSuccess.hidden = true;
+  alertDanger.hidden = true;
 
+  const usuario = usuarios.find((u) => u.nomeUsuario === nome);
+
+  if (usuario) {
+    alertSuccess.innerText = "Usuário encontrado: " + usuario.nomeUsuario;
+    alertSuccess.hidden = false;
+    setTimeout(() => {
+      alertSuccess.hidden = true;
+      alertDanger.hidden = true;
+    }, 5000);
+
+    document.getElementById("userId").value = usuario.idUsuario;
+    console.log("ID do usuário encontrado:", usuario.idUsuario);
+    document.getElementById("userNome").value = usuario.nomeUsuario;
+    console.log("Nome do usuário encontrado:", usuario.nomeUsuario);
+    document.getElementById("userEmail").value = usuario.emailUsuario;
+    console.log("Email do usuário encontrado:", usuario.emailUsuario);
+    document.getElementById("userDn").value = usuario.dnUsuario;
+    console.log("Data de nascimento do usuário encontrado:", usuario.dnUsuario);
+    document.getElementById("categ").value = usuario.categoriaUsuario;
+    console.log("Categoria do usuário encontrado:", usuario.categoriaUsuario);
+  } else {
+    alertDanger.innerText = "Usuário não encontrado";
+    alertDanger.hidden = false;
+    setTimeout(() => {
+      alertSuccess.hidden = true;
+      alertDanger.hidden = true;
+    }, 5000);
+  }
+}

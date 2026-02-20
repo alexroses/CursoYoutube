@@ -2,20 +2,26 @@ import { Request, Response } from "express";
 import user from "../models/user.ts";
 
 export const principal = async (req: Request, res: Response) => {
-    
-    res.render("index", {
+  let idlogin = req.user ? (req.user as any).idUsuario : null;
+  let dadoslogin = await user.findByPk(idlogin);
+
+  res.render("index", {
     cabecalho: true,
     hero: true,
     carrossel: true,
     beneficios: true,
     rodape: true,
+    dadoslogin: dadoslogin || null,
+    mensagem: req.flash("success_msg"),
+    tipo: "success",
   });
 };
 
-
 export const listar = async (req: Request, res: Response) => {
-
   let dadosuser = await user.findAll({ raw: true });
+
+  let idlogin = req.user ? (req.user as any).idUsuario : null;
+  let dadoslogin = await user.findByPk(idlogin);
 
   dadosuser = dadosuser.map((item: any) => ({
     ...item,
@@ -31,17 +37,19 @@ export const listar = async (req: Request, res: Response) => {
     beneficios: false,
     rodape: true,
     dadosuser: dadosuser,
+    dadoslogin: dadoslogin || null,
   });
 };
 
-
 export const visualizar = async (req: Request, res: Response) => {
   let id = Number(req.params.id);
-  //console.log("ID recebido:", id); // Verifique se o ID está sendo recebido corretamente
 
   let dadosuser = await user.findByPk(id);
 
-  //console.log("Dados do usuário:", dadosuser); // Verifique os dados do usuário antes de renderizar
+  let idlogin = req.user ? (req.user as any).idUsuario : null;
+  let dadoslogin = await user.findByPk(idlogin);
+
+  let categoria = dadosuser?.dataValues.categoriaUsuario.toString() || "";
 
   res.render("usuario", {
     cabecalho: true,
@@ -50,42 +58,51 @@ export const visualizar = async (req: Request, res: Response) => {
     beneficios: false,
     rodape: true,
     dadosuser: JSON.parse(JSON.stringify(dadosuser)),
+
+    dadoslogin: dadoslogin || null,
   });
 };
 
 export const novo = async (req: Request, res: Response) => {
-    res.render("novoUser", {
+  let idlogin = req.user ? (req.user as any).idUsuario : null;
+  let dadoslogin = await user.findByPk(idlogin);
+
+  res.render("novoUser", {
     cabecalho: true,
     hero: false,
     carrossel: false,
     beneficios: false,
     rodape: true,
-    
+    dadoslogin: dadoslogin || null,
   });
 };
-  
+
 export const cadastrar = async (req: Request, res: Response) => {
   let usuario = req.body.nome;
-  console.log("Nome do usuário recebido:", usuario); // Verifique se o nome do usuário está sendo recebido corretamente
+
   let email = req.body.email;
-  console.log("Email do usuário recebido:", email); // Verifique se o email do usuário está sendo recebido corretamente
+
   let dn = req.body.dn;
-  console.log("Data de nascimento do usuário recebida:", dn);
+
+  let categoria = req.body.categ;
+  categoria = parseInt(categoria);
+  console.log("Categoria do usuário recebida:", categoria, typeof categoria);
+
+  let senha = "123456";
 
   let mensagem: string = "";
   let tipo: string = "";
+
+  let idlogin = req.user ? (req.user as any).idUsuario : null;
+  let dadoslogin = await user.findByPk(idlogin);
 
   let dadosuser = await user.findOne({
     where: { nomeUsuario: usuario },
   });
 
-  console.log("Dados do usuário encontrado por nome:", dadosuser);
-
   if (dadosuser) {
     mensagem = "Usuário já cadastrado";
     tipo = "danger";
-    console.log(mensagem);
-    console.log("Dados do usuário para renderizar:", dadosuser);
 
     res.render("cadUser", {
       cabecalho: true,
@@ -96,6 +113,8 @@ export const cadastrar = async (req: Request, res: Response) => {
       dadosuser: dadosuser.dataValues,
       mensagem: mensagem,
       tipo: tipo,
+
+      dadoslogin: dadoslogin || null,
     });
 
     return;
@@ -105,7 +124,6 @@ export const cadastrar = async (req: Request, res: Response) => {
   if (dadosemail) {
     mensagem = "Email já cadastrado";
     tipo = "danger";
-    console.log(mensagem);
 
     res.render("cadUser", {
       cabecalho: true,
@@ -116,6 +134,8 @@ export const cadastrar = async (req: Request, res: Response) => {
       dadosuser: dadosemail.dataValues,
       mensagem: mensagem,
       tipo: tipo,
+
+      dadoslogin: dadoslogin || null,
     });
 
     return;
@@ -127,6 +147,8 @@ export const cadastrar = async (req: Request, res: Response) => {
         nomeUsuario: req.body.nome,
         emailUsuario: req.body.email,
         dnUsuario: req.body.dn,
+        categoriaUsuario: parseInt(req.body.categ),
+        senhaUsuario: senha,
       })
       .then(function () {
         mensagem = "Usuário cadastrado com sucesso!";
@@ -136,7 +158,6 @@ export const cadastrar = async (req: Request, res: Response) => {
         mensagem = "Erro ao cadastrar usuário: " + error.message;
         tipo = "danger";
       });
-    console.log(mensagem);
 
     res.render("novoUser", {
       cabecalho: true,
@@ -146,56 +167,59 @@ export const cadastrar = async (req: Request, res: Response) => {
       rodape: true,
       mensagem: mensagem,
       tipo: tipo,
+      dadoslogin: dadoslogin || null,
     });
   }
 };
 
 export const alterar = async (req: Request, res: Response) => {
   let id = req.body.id;
-  console.log("ID do usuário recebido para alteração:", id); // Verifique se o ID do usuário está sendo recebido corretamente
+
   let usuario = req.body.nome;
-  console.log("Nome do usuário recebido:", usuario); // Verifique se o nome do usuário está sendo recebido corretamente
+
   let email = req.body.email;
-  console.log("Email do usuário recebido:", email); // Verifique se o email do usuário está sendo recebido corretamente
+
   let dn = req.body.dn;
-  console.log("Data de nascimento do usuário recebida:", dn); // Verifique se a data de nascimento do usuário está sendo recebida corretamente
+
+  let categoria = parseInt(req.body.categ);
+
+  let categSel = req.body.sel;
 
   let mensagem: string = "";
   let tipo: string = "";
 
+  let idlogin = req.user ? (req.user as any).idUsuario : null;
+  let dadoslogin = await user.findByPk(idlogin);
+
   let dadosuser = await user.findByPk(id);
 
   if (dadosuser) {
-
     if (
       dadosuser.dataValues.nomeUsuario === usuario &&
       dadosuser.dataValues.emailUsuario === email &&
-      dadosuser.dataValues.dnUsuario === dn
+      dadosuser.dataValues.dnUsuario === dn &&
+      dadosuser.dataValues.categoriaUsuario === categoria
     ) {
-
       mensagem = "Nenhuma alteração foi feita!";
       tipo = "info";
-
     } else {
-
       try {
         await user.update(
           {
             nomeUsuario: usuario,
             emailUsuario: email,
             dnUsuario: dn,
+            categoriaUsuario: categoria,
           },
-          { where: { idUsuario: id } }
+          { where: { idUsuario: id } },
         );
 
         mensagem = "Usuário alterado com sucesso!";
         tipo = "success";
-
       } catch (error: any) {
         mensagem = "Erro ao alterar usuário: " + error.message;
         tipo = "danger";
       }
-
     }
 
     dadosuser = await user.findByPk(id);
@@ -207,20 +231,17 @@ export const alterar = async (req: Request, res: Response) => {
       beneficios: false,
       rodape: true,
       dadosuser: JSON.parse(JSON.stringify(dadosuser)),
+
       mensagem: mensagem,
       tipo: tipo,
+      dadoslogin: dadoslogin || null,
     });
-
   } else {
-
     return res.status(404).send("Usuário não encontrado");
-
   }
-
 };
 
 export const excluir = async (req: Request, res: Response) => {
-
   const id = req.body.id;
 
   if (!id) {
@@ -230,10 +251,29 @@ export const excluir = async (req: Request, res: Response) => {
   let mensagem = "";
   let tipo = "";
 
+  let idlogin = req.user ? (req.user as any).idUsuario : null;
+  let dadoslogin = await user.findByPk(idlogin);
+
   const usuario = await user.findByPk(id);
 
   if (!usuario) {
     return res.status(404).send("Usuário não encontrado");
+  }
+
+  if (dadoslogin?.dataValues.emailUsuario === usuario?.dataValues.emailUsuario) {
+    mensagem = "Você não pode excluir seu próprio usuário!";
+    tipo = "danger";
+    return res.render("usuario", {
+      cabecalho: true,
+      hero: false,
+      carrossel: false,
+      beneficios: false,
+      rodape: true,
+      dadosuser: usuario.dataValues,
+      mensagem: mensagem,
+      tipo: tipo,
+      dadoslogin: dadoslogin || null,
+    });
   }
 
   try {
@@ -257,7 +297,39 @@ export const excluir = async (req: Request, res: Response) => {
     dadosuser: dadosuser,
     mensagem: mensagem,
     tipo: tipo,
+    dadoslogin: dadoslogin || null,
   });
+};
+function elseif(arg0: boolean) {
+  throw new Error("Function not implemented.");
+}
 
-};  
+export const pesquisar = async (req: Request, res: Response) => {
+  let dadosuser = await user.findAll({ raw: true });
 
+  let idlogin = req.user ? (req.user as any).idUsuario : null;
+  let dadoslogin = await user.findByPk(idlogin);
+
+  res.render("usuario", {
+    cabecalho: true,
+    busca: true,
+    hero: false,
+    carrossel: false,
+    beneficios: false,
+    rodape: true,
+    dadosuser: dadosuser,
+    dadoslogin: dadoslogin || null,
+  });
+};
+
+export const logar = async (req: Request, res: Response) => {
+  res.render("index", {
+    cabecalho: true,
+    hero: true,
+    carrossel: true,
+    beneficios: true,
+    rodape: true,
+    mensagem: req.flash("error"),
+    tipo: "danger",
+  });
+};

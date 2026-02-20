@@ -10,40 +10,74 @@
       action="/cadUser"
     >
       <!-- campos do formulário -->
-     
-      
-      
-       <div class="mb-3">
+
+      <div class="mb-3">
         <label class="form-label">Nome</label>
-        <input type="text" class="form-control" name="nome" id="nome" minlength="3" maxlength="60" pattern="[a-zA-ZÀ-ÿ\s]+" title="O nome deve conter apenas letras e espaços e deve ter entre 3 e 60 caracteres." value="{{dadosuser.nomeUsuario}}" required />
-       </div>
-      
+        <input
+          type="text"
+          class="form-control"
+          name="nome"
+          id="nome"
+          minlength="3"
+          maxlength="60"
+          pattern="[a-zA-ZÀ-ÿ\s]+"
+          title="O nome deve conter apenas letras e espaços e deve ter entre 3 e 60 caracteres."
+          value="{{dadosuser.nomeUsuario}}"
+          required
+        />
+      </div>
+
       <div class="mb-3">
         <label class="form-label">Email</label>
-        <input type="email" class="form-control" name="email" id="email" value="{{dadosuser.emailUsuario}}" required />
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          id="email"
+          value="{{dadosuser.emailUsuario}}"
+          required
+        />
       </div>
 
       <div class="mb-3">
         <label class="form-label">Data de Nascimento</label>
-        <input type="date" class="form-control" name="dn" id="dn" min="1905-01-01" max="2008-01-01" title="Digite uma data de nascimento válida entre 1905 e 2008, máximo de 120 anos e mínimo de 18 anos." value="{{dadosuser.dnUsuario}}" required />
+        <input
+          type="date"
+          class="form-control"
+          name="dn"
+          id="dn"
+          min="1905-01-01"
+          max="2008-01-01"
+          title="Digite uma data de nascimento válida entre 1905 e 2008, máximo de 120 anos e mínimo de 18 anos."
+          value="{{dadosuser.dnUsuario}}"
+          required
+        />
       </div>
-      
-   
-        
-     
-      
-      
-   
+
+      <div class="mb-3">
+        <label class="form-label">Selecione a Categoria do Usuário</label>
+        <select class="form-select" name="categ" id="categ" required>
+          <option
+            id="sel"
+            value="{{dadosuser.categoriaUsuario}}"
+            selected
+          >{{categNome}}</option>
+          <option value="1">Básico</option>
+          <option value="2">Avançado</option>
+          <option value="3">Administrador</option>
+        </select>
+      </div>
 
       <!-- botão abre modal -->
 
       <div class="d-flex justify-content-center gap-3 animate">
-        
+
         <a href="usuarios" class="btn btn-outline-secondary btn-animate">
           <i class="fas fa-arrow-left me-1"></i>
           Voltar
         </a>
 
+        {{#if (gte dadoslogin.dataValues.categoriaUsuario 2)}}
         <button
           type="button"
           class="btn btn-success btn-animate"
@@ -53,6 +87,7 @@
           <i class="fas fa-save me-1"></i>
           Salvar
         </button>
+        {{/if}}
 
         <button
           type="button"
@@ -63,12 +98,10 @@
           Limpar
         </button>
 
-        
       </div>
     </form>
   </div>
 </section>
-
 
 <!-- MODAL FORA DO FORM -->
 <div class="modal fade" id="confirmCadastro" tabindex="-1">
@@ -94,15 +127,10 @@
           Cancelar
         </button>
 
-        <button
-          type="button"
-          class="btn btn-success"
-          onclick="submitFormCadastro()"
-        >
+        <button type="submit" form="userForm" class="btn btn-success">
           Confirmar
         </button>
       </div>
     </div>
   </div>
 </div>
-

@@ -10,32 +10,66 @@
       action="/cadUser"
     >
       <!-- campos do formulário -->
-      
+
       <div class="mb-3">
         <label class="form-label">Nome</label>
-        <input type="text" class="form-control" name="nome" minlength="3" maxlength="60" pattern="[a-zA-ZÀ-ÿ\s]+" title="O nome deve conter apenas letras e espaços e deve ter entre 3 e 60 caracteres." required />
+        <input
+          type="text"
+          class="form-control"
+          name="nome"
+          minlength="3"
+          maxlength="60"
+          pattern="[a-zA-ZÀ-ÿ\s]+"
+          title="O nome deve conter apenas letras e espaços e deve ter entre 3 e 60 caracteres."
+          required
+        />
       </div>
 
       <div class="mb-3">
         <label class="form-label">Email</label>
-        <input type="email" class="form-control" name="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" title="Digite um e-mail válido sem caracteres especiais proibidos." required />
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+          title="Digite um e-mail válido sem caracteres especiais proibidos."
+          required
+        />
       </div>
 
       <div class="mb-3">
         <label class="form-label">Data de Nascimento</label>
-        <input type="date" class="form-control" name="dn" min="1905-01-01" max="2008-01-01" title="Digite uma data de nascimento válida entre 1905 e 2008, máximo de 120 anos e mínimo de 18 anos." required />
+        <input
+          type="date"
+          class="form-control"
+          name="dn"
+          min="1905-01-01"
+          max="2008-01-01"
+          title="Digite uma data de nascimento válida entre 1905 e 2008, máximo de 120 anos e mínimo de 18 anos."
+          required
+        />
       </div>
-    
+
+      <div class="mb-3">
+        <label class="form-label">Selecione a Categoria do Usuário</label>
+        <select class="form-select" name="categ" required>
+          <option selected></option>
+          <option value="1">Básico</option>
+          <option value="2">Avançado</option>
+          <option value="3">Administrador</option>
+        </select>
+      </div>
 
       <!-- botão abre modal -->
 
       <div class="d-flex justify-content-center gap-3 animate">
-        
+
         <a href="usuarios" class="btn btn-outline-secondary btn-animate">
           <i class="fas fa-arrow-left me-1"></i>
           Voltar
         </a>
 
+        {{#if (gte dadoslogin.dataValues.categoriaUsuario 2)}}
         <button
           type="button"
           class="btn btn-success btn-animate"
@@ -45,6 +79,7 @@
           <i class="fas fa-save me-1"></i>
           Salvar
         </button>
+        {{/if}}
 
         <button
           type="button"
@@ -55,12 +90,10 @@
           Limpar
         </button>
 
-       
       </div>
     </form>
   </div>
 </section>
-
 
 <!-- MODAL FORA DO FORM -->
 <div class="modal fade" id="confirmCadastro" tabindex="-1">
@@ -86,11 +119,7 @@
           Cancelar
         </button>
 
-        <button
-          type="submit"
-          form="userForm"
-          class="btn btn-success"
-        >
+        <button type="submit" form="userForm" class="btn btn-success">
           Confirmar
         </button>
       </div>
