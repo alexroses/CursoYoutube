@@ -2,19 +2,28 @@ import { Request, Response } from "express";
 import user from "../models/user.ts";
 
 export const principal = async (req: Request, res: Response) => {
-  let idlogin = req.user ? (req.user as any).idUsuario : null;
-  let dadoslogin = await user.findByPk(idlogin);
+  try {
+    const idlogin = req.user ? (req.user as any).idUsuario : null;
+    let dadoslogin = null;
 
-  res.render("index", {
-    cabecalho: true,
-    hero: true,
-    carrossel: true,
-    beneficios: true,
-    rodape: true,
-    dadoslogin: dadoslogin || null,
-    mensagem: req.flash("success_msg"),
-    tipo: "success",
-  });
+    if (idlogin) {
+      dadoslogin = await user.findByPk(idlogin);
+    }
+
+    res.render("index", {
+      cabecalho: true,
+      hero: true,
+      carrossel: true,
+      beneficios: true,
+      rodape: true,
+      dadoslogin: dadoslogin || null,
+      mensagem: req.flash("success_msg"),
+      tipo: "success",
+    });
+  } catch (err) {
+    console.error("Erro na rota principal:", err);
+    res.status(500).send("Erro interno do servidor");
+  }
 };
 
 export const listar = async (req: Request, res: Response) => {
